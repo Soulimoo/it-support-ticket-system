@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: IT Support Ticket System API
+  description: API documentation for managing IT support tickets.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /api/users/login:
+    post:
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Successful login
+        "401":
+          description: Unauthorized
+
+  /api/tickets:
+    post:
+      summary: Create a new support ticket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+      responses:
+        "201":
+          description: Ticket created successfully
+
+    get:
+      summary: Get all tickets (IT Support) or user's tickets (Employee)
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of tickets
+
+  /api/tickets/{id}:
+    get:
+      summary: Get a ticket by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ticket details
+        "404":
+          description: Ticket not found
+
+    patch:
+      summary: Update ticket status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [NEW, IN_PROGRESS, RESOLVED]
+      responses:
+        "200":
+          description: Ticket status updated
+        "404":
+          description: Ticket not found
+
+components:
+  schemas:
+    Ticket:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH]
+        category:
+          type: string
+          enum: [NETWORK, HARDWARE, SOFTWARE, OTHER]
+        status:
+          type: string
+          enum: [NEW, IN_PROGRESS, RESOLVED]
+        user:
+          type: object
+          properties:
+            id:
+              type: integer

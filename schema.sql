@@ -29,4 +29,6 @@ CREATE TABLE audit_logs (
 );
 
 -- Insert Default Admin User
-INSERT INTO users (username, password, role) VALUES ('admin', 'admin123', 'IT_SUPPORT');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2a$10$TbFxrzGg34gCLLI3FP3lY.cAOiHNYUUTb539IxJphILU3p5EGtgGe', 'IT_SUPPORT');
+
+INSERT INTO users (username, password, role) VALUES ('employee', '$2a$10$TbFxrzGg34gCLLI3FP3lY.cAOiHNYUUTb539IxJphILU3p5EGtgGe', 'EMPLOYEE');
