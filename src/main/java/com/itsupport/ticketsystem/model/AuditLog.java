@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "AUDIT_LOGS", schema = "ITSUPPORT")
 public class AuditLog {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
