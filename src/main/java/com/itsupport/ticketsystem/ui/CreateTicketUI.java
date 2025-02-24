@@ -68,7 +68,7 @@ public class CreateTicketUI extends JFrame {
 
     private void submitTicket() {
         String title = txtTitle.getText().trim();
-        String description = txtDescription.getText().trim().replaceAll("[\t\n\r]", " ");  // ✅ Remove tabs/newlines
+        String description = txtDescription.getText().trim().replaceAll("[\t\n\r]", " ");
         String priority = ((String) cmbPriority.getSelectedItem()).toUpperCase();
         String category = ((String) cmbCategory.getSelectedItem()).toUpperCase();
 

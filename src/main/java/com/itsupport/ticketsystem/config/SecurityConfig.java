@@ -19,14 +19,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())  // ❌ Disable CSRF for API requests
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/login").permitAll()  // ✅ Allow login API for everyone
+                        .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/api/tickets/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // ✅ Stateless API
-                .httpBasic(Customizer.withDefaults());  // ✅ Correct usage in Spring Security 6.1+
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }

@@ -22,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;  // ✅ Fix: Inject PasswordEncoder
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -44,7 +44,6 @@ public class UserController {
         if (foundUser.isPresent() && passwordEncoder.matches(user.getPassword(), foundUser.get().getPassword())) {
             User loggedInUser = foundUser.get();
 
-            // ✅ Return full user details
             Map<String, Object> response = new HashMap<>();
             response.put("status", "success");
             response.put("id", loggedInUser.getId());

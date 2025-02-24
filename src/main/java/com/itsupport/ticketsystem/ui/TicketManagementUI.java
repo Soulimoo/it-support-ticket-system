@@ -113,7 +113,6 @@ public class TicketManagementUI extends JFrame {
 
             System.out.println("Tickets API Response: " + response);
 
-            // ✅ Use JSONArray instead of JSONObject
             JSONArray ticketsArray = new JSONArray(response);
             ticketData = new String[ticketsArray.length()][5];
 
@@ -241,7 +240,7 @@ public class TicketManagementUI extends JFrame {
     private void filterTicketsByStatus() {
         String selectedStatus = (String) cmbStatusFilter.getSelectedItem();
         if (selectedStatus.equals("All")) {
-            fetchTickets(); // Load all tickets
+            fetchTickets();
             return;
         }
 
@@ -273,9 +272,9 @@ public class TicketManagementUI extends JFrame {
     }
 
     private void resetSearchAndFilter() {
-        txtSearchId.setText("");  // Clear Ticket ID input
-        cmbStatusFilter.setSelectedIndex(0);  // Reset status dropdown
-        fetchTickets();  // Reload all tickets
+        txtSearchId.setText("");
+        cmbStatusFilter.setSelectedIndex(0);
+        fetchTickets();
     }
 
 

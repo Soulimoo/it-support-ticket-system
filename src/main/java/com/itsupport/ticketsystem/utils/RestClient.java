@@ -26,7 +26,6 @@ public class RestClient {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
 
-            // ✅ Add authentication header from logged-in user
             if (LoginUI.getLoggedInUsername() != null && LoginUI.getLoggedInPassword() != null) {
                 String auth = LoginUI.getLoggedInUsername() + ":" + LoginUI.getLoggedInPassword();
                 String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
@@ -73,7 +72,6 @@ public class RestClient {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");
 
-            // ✅ Add authentication headers
             if (LoginUI.getLoggedInUsername() != null && LoginUI.getLoggedInPassword() != null) {
                 String auth = LoginUI.getLoggedInUsername() + ":" + LoginUI.getLoggedInPassword();
                 String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
@@ -141,7 +139,6 @@ public class RestClient {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
-            // ✅ Add authentication headers
             if (LoginUI.getLoggedInUsername() != null && LoginUI.getLoggedInPassword() != null) {
                 String auth = LoginUI.getLoggedInUsername() + ":" + LoginUI.getLoggedInPassword();
                 String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));

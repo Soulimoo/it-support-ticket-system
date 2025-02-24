@@ -22,7 +22,7 @@ public class UserServiceTest {
     private UserRepository userRepository;
 
     @Mock
-    private PasswordEncoder passwordEncoder;  // ✅ Mock PasswordEncoder
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private UserService userService;
@@ -36,7 +36,7 @@ public class UserServiceTest {
 
     @Test
     void testCreateUser() {
-        when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");  // ✅ Mock password encoding
+        when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(mockUser);
 
         User createdUser = userService.createUser(mockUser);

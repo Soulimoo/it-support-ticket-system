@@ -18,7 +18,7 @@ public class LoginUI extends JFrame {
     private JPasswordField passwordField;
 
     public LoginUI() {
-        System.out.println("LoginUI Window Opened");  // ✅ Debugging line
+        System.out.println("LoginUI Window Opened");
         setTitle("Login");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -32,9 +32,8 @@ public class LoginUI extends JFrame {
 
         JButton loginButton = new JButton("Login");
 
-        // ✅ Ensure the action listener is added
         loginButton.addActionListener(e -> {
-            System.out.println("Login Button Clicked");  // ✅ Debugging log
+            System.out.println("Login Button Clicked");
             authenticateUser();
         });
 
@@ -46,7 +45,7 @@ public class LoginUI extends JFrame {
         add(loginButton);
 
         setLocationRelativeTo(null);
-        setVisible(true); // ✅ Ensure window is visible
+        setVisible(true);
     }
 
     public static String getLoggedInRole() {
@@ -56,7 +55,7 @@ public class LoginUI extends JFrame {
 
     private void authenticateUser() {
 
-        System.out.println("Login Button Clicked");  // ✅ Debugging line
+        System.out.println("Login Button Clicked");
 
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
@@ -66,14 +65,12 @@ public class LoginUI extends JFrame {
             return;
         }
 
-        // ✅ Log the request payload
         String jsonPayload = "{\"username\": \"" + username + "\", \"password\": \"" + password + "\"}";
         System.out.println("Sending login request: " + jsonPayload);
 
         try {
             String response = RestClient.sendPostRequest("api/users/login", jsonPayload);
 
-            // ✅ Log the response
             System.out.println("Login API Response: " + response);
 
             try {
@@ -81,11 +78,11 @@ public class LoginUI extends JFrame {
 
                 if (jsonResponse.getString("status").equals("success")) {
                     loggedInUsername = jsonResponse.getString("username");
-                    loggedInUserId = jsonResponse.getLong("id");  // ✅ Store User ID
+                    loggedInUserId = jsonResponse.getLong("id");
                     loggedInRole = jsonResponse.getString("role");
 
                     JOptionPane.showMessageDialog(this, "Login Successful!");
-                    new TicketManagementUI(); // Open ticket management UI
+                    new TicketManagementUI();
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Invalid credentials!", "Error", JOptionPane.ERROR_MESSAGE);

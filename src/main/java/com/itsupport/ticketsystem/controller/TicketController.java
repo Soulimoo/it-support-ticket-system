@@ -85,7 +85,7 @@ public class TicketController {
 
         User user = userOpt.get();
 
-        // 🚨 Only IT Support Can Update Status
+        // Only IT Support Can Update Status
         if (user.getRole() != User.Role.IT_SUPPORT) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
