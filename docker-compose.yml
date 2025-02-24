@@ -8,17 +8,28 @@ services:
       ORACLE_PASSWORD: password
       ORACLE_DATABASE: XEPDB1
     ports:
-      - "1521:1521"
+      - "1522:1521"
     volumes:
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "echo 'SELECT 1 FROM DUAL;' | sqlplus -S SYSTEM/password@XEPDB1 || exit 1"]
+      interval: 10s
+      retries: 10
+      start_period: 40s
 
   backend:
     build: .
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@db:1521/XEPDB1
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@db:1522/XEPDB1
       SPRING_DATASOURCE_USERNAME: ITSUPPORT
       SPRING_DATASOURCE_PASSWORD: password
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://db:1522 || exit 1"]
+      interval: 10s
+      retries: 10
+      start_period: 40s
